@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, FlatList } from 'react-native';
 import { LibroService } from './src/services/LibroService';
+import { LibroRepository } from './src/repositories/LibroRepository';
 
 const libroService = new LibroService();
+
+// PRUEBA DE SINGLETON 
+const repo1 = LibroRepository.getInstance();
+const repo2 = LibroRepository.getInstance();
+
+console.log("pruebita");
+console.log("Instancia 1 y Instancia 2 son iguales?: ", repo1 === repo2);
+if (repo1 === repo2) {
+    console.log("ÉXITO: Ambas llamadas retornan la misma instancia del Repository.");
+}
 
 export default function App() {
   const [libros, setLibros] = useState(libroService.obtenerLibros());
