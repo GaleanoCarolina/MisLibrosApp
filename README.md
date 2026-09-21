@@ -1,3 +1,5 @@
+En esta actualización se implementó el patrón Repository para separar la lógica de datos y el patrón Singleton para asegurar una única instancia del repositorio.
+
 # Mis Libros App
 
 ## 5. Reflexión
@@ -10,3 +12,4 @@ Manejar la lógica de negocio. Es el que se encarga directamente de almacenar, a
 
 **¿Qué responsabilidad tiene la clase Libro?**
 Servir como modelo de datos. Define los atributos que forman a un libro (id, título, autor, año) y sus métodos internos.
+
