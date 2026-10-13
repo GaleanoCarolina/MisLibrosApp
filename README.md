@@ -1,15 +1,5 @@
-En esta actualización se implementó el patrón Repository para separar la lógica de datos y el patrón Singleton para asegurar una única instancia del repositorio.
+## Autorización y RLS (Row Level Security)
 
-# Mis Libros App
-
-## 5. Reflexión
-
-**¿Por qué es conveniente separar la lógica de los libros de App.tsx?**
-Para mantener el código ordenado y escalable. App.tsx solo se encarga de mostrar la interfaz de usuario, no de procesar cómo funcionan los datos.
-
-**¿Qué responsabilidad tiene LibroService?**
-Manejar la lógica de negocio. Es el que se encarga directamente de almacenar, agregar y eliminar los libros de la lista.
-
-**¿Qué responsabilidad tiene la clase Libro?**
-Servir como modelo de datos. Define los atributos que forman a un libro (id, título, autor, año) y sus métodos internos.
-
+1. **Autenticación (Auth):** Cuando un usuario se registra e inicia sesión, Supabase le asigna un identificador único (UUID). Este UUID se almacena de forma segura en la sesión del dispositivo.
+2. **Autorización en base de datos (RLS):** La tabla `libros` cuenta con políticas RLS (Row Level Security) activadas. Esto actúa como un filtro a nivel de la propia base de datos.
+3. **Relación:** Se configuro las políticas `GRANT` y `RLS` para que las acciones `SELECT`, `INSERT` y `DELETE` requieran el rol `authenticated`. Al momento de crear un registro, la base de datos inyecta automáticamente el ID del usuario en la columna `user_id`. Al hacer una consulta o eliminar, la regla `(auth.uid() = user_id)` evalúa si el token del usuario actual coincide con el autor del registro. Si no coinciden, la base de datos deniega el acceso, protegiendo así los datos entre diferentes cuentas.
